@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iCourse_Android.SelectBatchPage"
+             BackgroundColor="White"
+             Title="选课批次">
+    <ContentPage.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style x:Key="ValueLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid Padding="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <CollectionView x:Name="objectListView" 
+                        SelectionChanged="OnSelectionChanged"
+                        BackgroundColor="LightSkyBlue"
+                        VerticalOptions="FillAndExpand"
+                        Margin="10"
+                        SelectionMode="Single"
+                        Grid.Column="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding batchName}" FontSize="20"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <StackLayout Grid.Column="1" Padding="10" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="轮次码:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="batchCodeLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="轮次名:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="batchNameLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="开始时间:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="beginTimeLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="结束时间:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="endTimeLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="选课策略:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="tacticNameLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="不可选原因:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="noSelectReasonLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="选课类型:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="typeNameLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Label Text="是否可选:" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="canSelectLabel" Style="{StaticResource ValueLabelStyle}"/>
+            <Button x:Name="confirmButton" Text="确定" WidthRequest="100" HeightRequest="40" HorizontalOptions="Center" BackgroundColor="RoyalBlue" TextColor="White" CornerRadius="20" Clicked="OnConfirmButtonClicked"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
