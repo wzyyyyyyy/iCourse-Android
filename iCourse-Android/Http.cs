@@ -59,14 +59,14 @@ namespace iCourse_Android
                 {
                     retryAttempt++;
                     var waitTime = TimeSpan.FromMilliseconds(Math.Pow(2, Math.Min(retryAttempt, 8))); // 上限为256ms
-                    MainPage.Instance.WriteLine($"重试第 {retryAttempt} 次，等待时间 {waitTime.TotalSeconds} 秒");
+                    MainPage.Instance.DEBUG($"重试第 {retryAttempt} 次，等待时间 {waitTime.TotalSeconds} 秒");
                     await Task.Delay(waitTime);
                 }
                 catch (Exception ex)
                 {
                     retryAttempt++;
                     var waitTime = TimeSpan.FromMilliseconds(Math.Pow(2, Math.Min(retryAttempt, 8))); // 上限为256ms
-                    MainPage.Instance.WriteLine($"发生异常：{ex}，等待 {waitTime.TotalSeconds} 秒后重试。");
+                    MainPage.Instance.DEBUG($"发生异常：{ex}，等待 {waitTime.TotalSeconds} 秒后重试。");
                     await Task.Delay(waitTime);
                 }
             }

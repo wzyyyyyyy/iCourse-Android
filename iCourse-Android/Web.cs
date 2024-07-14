@@ -68,7 +68,7 @@ namespace iCourse_Android
 
             if (msg == "验证码错误")
             {
-                MainPage.Instance.WriteLine(msg);
+                MainPage.Instance.DEBUG(msg);
                 (code, msg) = await LoginAsync();
             }
 
@@ -164,12 +164,12 @@ namespace iCourse_Android
             var json = JObject.Parse(response);
             if (json["code"].ToObject<int>() == 200)
             {
-                MainPage.Instance.WriteLine("选课批次设置成功");
-                MainPage.Instance.WriteLine("已选批次:" + batch.batchName);
+                MainPage.Instance.DEBUG("选课批次设置成功");
+                MainPage.Instance.DEBUG("已选批次:" + batch.batchName);
             }
             else
             {
-                MainPage.Instance.WriteLine(json["msg"].ToString());
+                MainPage.Instance.DEBUG(json["msg"].ToString());
             }
 
             client.SetReferer("https://icourses.jlu.edu.cn/xsxk/profile/index.html");
@@ -202,10 +202,10 @@ namespace iCourse_Android
             }
             else
             {
-                MainPage.Instance.WriteLine(json["msg"].ToString());
+                MainPage.Instance.DEBUG(json["msg"].ToString());
             }
 
-            MainPage.Instance.WriteLine("收藏中的课程:\n" + string.Join("\n", coursesList.Select(c => c.courseName)));
+            MainPage.Instance.DEBUG("收藏中的课程:\n" + string.Join("\n", coursesList.Select(c => c.courseName)));
             return coursesList;
         }
 
@@ -226,7 +226,7 @@ namespace iCourse_Android
 
                 if (code == 200)
                 {
-                    MainPage.Instance.WriteLine("已选课程:" + course.courseName);
+                    MainPage.Instance.DEBUG("已选课程:" + course.courseName);
                     return (true, null);
                 }
                 else
@@ -234,20 +234,20 @@ namespace iCourse_Android
                     var msg = json["msg"].ToString();
                     if (msg == "该课程已在选课结果中")
                     {
-                        MainPage.Instance.WriteLine(course.courseName + " : " + msg);
-                        MainPage.Instance.WriteLine(course.courseName + " : 已放弃,尝试选下一门课程");
+                        MainPage.Instance.DEBUG(course.courseName + " : " + msg);
+                        MainPage.Instance.DEBUG(course.courseName + " : 已放弃,尝试选下一门课程");
                         return (true, null);
                     }
 
                     if (msg == "课容量已满")
                     {
-                        MainPage.Instance.WriteLine(course.courseName + " : " + msg);
-                        MainPage.Instance.WriteLine(course.courseName + " : 已放弃,尝试选下一门课程");
+                        MainPage.Instance.DEBUG(course.courseName + " : " + msg);
+                        MainPage.Instance.DEBUG(course.courseName + " : 已放弃,尝试选下一门课程");
                         return (false, msg);
                     }
 
-                    MainPage.Instance.WriteLine(course.courseName + " : 选课失败,原因：" + msg);
-                    MainPage.Instance.WriteLine(course.courseName + " : 重新尝试...");
+                    MainPage.Instance.DEBUG(course.courseName + " : 选课失败,原因：" + msg);
+                    MainPage.Instance.DEBUG(course.courseName + " : 重新尝试...");
                     await Task.Delay(200 + new Random().Next(0, 200));
                 }
             }

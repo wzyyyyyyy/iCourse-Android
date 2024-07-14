@@ -14,9 +14,9 @@
             Instance = this;
         }
 
-        public void WriteLine(string message)
+        public void DEBUG(string message)
         {
-            DisplayAlert("Error", message, "111111");
+            DisplayAlert("DEBUG", message, "Cancel");
         }
 
         public async Task LoginAsync()
@@ -32,14 +32,14 @@
             // 登录失败
             if (code != 200)
             {
-                WriteLine(msg);
-                WriteLine("登录失败，请检查用户名和密码是否正确。");
+                DEBUG(msg);
+                DEBUG("登录失败，请检查用户名和密码是否正确。");
                 isLogged = false;
                 return;
             }
 
             // 登录成功
-            WriteLine(msg);
+            DEBUG(msg);
             isLogged = true;
 
             // 获取学生信息
@@ -47,9 +47,9 @@
             var studentID = response["data"]["student"]["XH"].ToString();
             var collage = response["data"]["student"]["YXMC"].ToString();
 
-            WriteLine($"姓名：{studentName}");
-            WriteLine($"学号：{studentID}");
-            WriteLine($"学院：{collage}");
+            DEBUG($"姓名：{studentName}");
+            DEBUG($"学号：{studentID}");
+            DEBUG($"学院：{collage}");
 
             // 显示选课批次
             var batchInfos = web.GetBatchInfo();
@@ -58,14 +58,14 @@
                 var batchPage = new SelectBatchPage(batchInfos);
             if (batchPage is null)
             {
-                WriteLine("fuck");
+                DEBUG("fuck");
                 return;
             }
                 await Navigation.PushAsync(new SelectBatchPage(batchInfos));
             }
             catch (Exception ex)
             {
-                WriteLine(ex.ToString());
+                DEBUG(ex.ToString());
             }
         }
 
