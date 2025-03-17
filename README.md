@@ -1,4 +1,5 @@
 # 还在做，没做完呢，可以先用 [PC版](https://github.com/wzyyyyyyy/JLUiCourse)
+# 寄了 我的安卓机彻底报废了 所以不打算做了（
 ### 如果觉得不错的话，就给我一个star吧
 
 ## 使用方法
